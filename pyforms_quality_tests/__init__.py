@@ -9,7 +9,7 @@ def makeLambdaFunc(func, **kwargs):
 	return lambda: func(**kwargs)
 
 
-def grab_screen(widget, outpath): 
+def grab_screen(widget, outpath):
 	if isinstance(widget, (BaseWidget,QtGui.QMainWindow) ):
 		win_id 	   = QtGui.QApplication.desktop().winId()
 		x, y, w, h = widget.rect().x(), widget.rect().y(), widget.rect().width(), widget.rect().height()
@@ -45,3 +45,9 @@ def test_screenshot(data_path, filename):
 	h2 = image2.histogram()
 	rms = math.sqrt(reduce(operator.add,map(lambda a,b: (a-b)**2, h1, h2))/len(h1))
 	return rms
+
+def print_screenshot_diff(data_path, filename):
+	print('-------------------------------------------------')
+	print('IMAGE DIFF {0}:'.format(filename) , test_screenshot(data_path, filename) ) 
+	print('-------------------------------------------------')
+	
